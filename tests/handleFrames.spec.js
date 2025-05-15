@@ -24,3 +24,17 @@ test("Handle Frames", async ({ page }) => {
   await page.waitForTimeout(5000);
 });
 
+test("Handle nested Frames", async ({ page }) => {
+  await page.goto("https://ui.vision/demo/webtest/frames/");
+
+  //handle frame using url and name
+
+  const frame1 = await page.frame({ url: 'url of src' });
+
+  const childFrames = await frame1?.childFrames(); // this will return array
+  childFrames[0].locator("locator").check();
+ 
+  await page.waitForTimeout(5000);
+});
+
+
